@@ -1,6 +1,7 @@
 const express = require("express");
 const user = require("../api/user");
 const mytoken = require("../api/mytoken");
+const emailapi = require("../api/email");
 let router = express.Router();
 router.get("/", async function(req, res, next) {
   //发送消息获取有多少个进程
@@ -28,6 +29,14 @@ router.post("/api/forgetpwd/", function(req, res, next) {
     res.json(data);
     // console.log(mytoken.tokenidDecrypt(data.token));
   });
+});
+
+router.post("/api/emailapi/", function(req, res, next) {
+  emailapi.setEmailData("1656082188@qq.com").then(function(data) {
+    console.log(data);
+    res.json(data);
+  });
+  res.send("你好");
 });
 
 //路由拦截 token 是否登录
